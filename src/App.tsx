@@ -1,18 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Shuffle from './Shuffle';
+import { shuffle } from './utils';
 
 function App() {
+  const [name, setName] = useState<string>('');
+
+  console.log('App render');
+
+  const random = () => setName(shuffle());
+  const clearName = () => setName('');
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-          Learn React
-        </a>
+        <Shuffle name={name} clearName={clearName} />
+        <button type="button" onClick={random} style={{marginTop: '10px'}} >Shuffle Name</button>
       </header>
     </div>
   );
